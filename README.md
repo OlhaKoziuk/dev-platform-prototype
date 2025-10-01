@@ -30,7 +30,7 @@ npm install
 cd ..
 
 cd server
-npm run server
+npm run dev
 # runs at http://localhost:3000
 
 cd client
