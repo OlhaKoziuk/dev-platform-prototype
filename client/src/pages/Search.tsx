@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Card, Col, Result, Row, Space, Spin, Tag, Typography, Select } from 'antd';
-import { apiGet, apiPost } from '../utils/api';
 import type { SearchResponse, Profile } from '../types';
 import SearchResultCard from '../components/SearchResultCard';
+import { getProfiles, searchProfiles } from '../api';
 
 const { Title, Text } = Typography;
 const { CheckableTag } = Tag;
@@ -62,16 +62,30 @@ export default function Search() {
   const [suggestions, setSuggestions] = useState<Profile[]>([]);
 
   useEffect(() => {
-    apiGet<Profile[]>('/profiles')
-      .then(list => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const list: Profile[] = await getProfiles();
+
+        if (cancelled) return;
+
         setSuggestions(sampleThree(list));
-        const uniq = Array.from(new Set(list.flatMap(p => p.skills))).sort((a, b) => a.localeCompare(b));
+
+        const uniq = Array.from(
+          new Set(list.flatMap(p => p.skills))
+        ).sort((a, b) => a.localeCompare(b));
+
         setAllSkills(uniq);
-      })
-      .catch(() => {
-        setSuggestions([]);
-        setAllSkills([]);
-      });
+      } catch {
+        if (!cancelled) {
+          setSuggestions([]);
+          setAllSkills([]);
+        }
+      }
+    })();
+
+    return () => { cancelled = true; };
   }, []);
 
   const options = useMemo(() => allSkills.map(s => ({ value: s, label: s })), [allSkills]);
@@ -91,11 +105,14 @@ export default function Search() {
 
     try {
       setLoading(true);
-      const res = await apiPost<SearchResponse>('/search', { skills });
+
+      const res = await searchProfiles(skills);
+
       const sorted = [...res.results].sort(sortByScoreRating);
       setData({ ...res, results: sorted });
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : typeof e === 'string' ? e : 'Помилка пошуку';
+      const message =
+        e instanceof Error ? e.message : typeof e === 'string' ? e : 'Помилка пошуку';
       setError(message);
     } finally {
       setLoading(false);

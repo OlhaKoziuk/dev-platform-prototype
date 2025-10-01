@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { apiGet } from '../utils/api';
 import type { Profile } from '../types';
 import { Card, Typography, Space, Tag, Rate, Skeleton, Result, Avatar } from 'antd';
+import { getProfiles } from '../api';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -14,16 +14,23 @@ export default function ProfilePage() {
 
   useEffect(() => {
     let mounted = true;
-    setLoading(true);
-    apiGet<Profile[]>('/profiles')
-      .then(list => {
+
+    (async () => {
+      try {
+        setLoading(true);
+        const list: Profile[] = await getProfiles();
         if (!mounted) return;
+
         const found = list.find(x => x.id === id) ?? null;
         setP(found);
         setError(found ? null : 'not-found');
-      })
-      .catch(() => mounted && setError('fetch-error'))
-      .finally(() => mounted && setLoading(false));
+      } catch {
+        if (mounted) setError('fetch-error');
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+
     return () => { mounted = false; };
   }, [id]);
 
