@@ -1,0 +1,12 @@
+{
+  "name": "dev-platform-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev:client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+

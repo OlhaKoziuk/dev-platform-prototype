@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "Jane Doe",
+    "city": "Kyiv",
+    "age": 29,
+    "about": "Frontend dev focused on UX and performance.",
+    "rating": 4.8,
+    "skills": ["React", "TypeScript", "Redux", "Tailwind", "Vite"],
+    "photo": null
+  },
+  {
+    "id": "2",
+    "name": "Ivan Petrenko",
+    "city": "Lviv",
+    "age": 31,
+    "about": "Full-stack with Node/Express and SQL.",
+    "rating": 4.5,
+    "skills": ["Node.js", "Express", "PostgreSQL", "Docker", "TypeScript"],
+    "photo": null
+  },
+  {
+    "id": "3",
+    "name": "Olha K.",
+    "city": "Dnipro",
+    "age": 27,
+    "about": "React + Next.js, likes clean architecture.",
+    "rating": 4.7,
+    "skills": ["React", "Next.js", "TypeScript", "GraphQL", "CSS"],
+    "photo": null
+  },
+  {
+    "id": "4",
+    "name": "Mykola S.",
+    "city": "Odesa",
+    "age": 33,
+    "about": "API design, testing, CI.",
+    "rating": 4.3,
+    "skills": ["Node.js", "Express", "MongoDB", "Jest", "Docker"],
+    "photo": null
+  },
+  {
+    "id": "5",
+    "name": "Sofia R.",
+    "city": "Kharkiv",
+    "age": 30,
+    "about": "Design systems and accessibility.",
+    "rating": 4.6,
+    "skills": ["React", "TypeScript", "Storybook", "ARIA", "Sass"],
+    "photo": null
+  },
+  {
+    "id": "6",
+    "name": "Andrii T.",
+    "city": "Kyiv",
+    "age": 32,
+    "about": "Cloud-ready backends.",
+    "rating": 4.4,
+    "skills": ["Node.js", "Express", "AWS", "Docker", "Redis"],
+    "photo": null
+  },
+  {
+    "id": "7",
+    "name": "Yulia M.",
+    "city": "Lviv",
+    "age": 26,
+    "about": "Data-heavy UIs.",
+    "rating": 4.2,
+    "skills": ["React", "Recharts", "D3", "TypeScript", "Zustand"],
+    "photo": null
+  },
+  {
+    "id": "8",
+    "name": "Taras H.",
+    "city": "Dnipro",
+    "age": 28,
+    "about": "Real-time apps.",
+    "rating": 4.1,
+    "skills": ["Node.js", "WebSocket", "Express", "TypeScript", "PostgreSQL"],
+    "photo": null
+  }
+]
