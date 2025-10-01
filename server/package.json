@@ -6,7 +6,7 @@
   "engines": { "node": ">=18" },
   "scripts": {
     "build": "tsc -p .",
-    "postbuild": "cp -r data dist/data",
+    "postbuild": "cp -r src/data dist/data", 
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js"
   },
