@@ -7,8 +7,28 @@ import type { Profile } from "./types.js";
 import { rankProfiles } from "./lib/search.js";
 
 const app = express();
+const devOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const envOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map(s => s.trim())
+  .filter(Boolean);
 
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"] }));
+app.use(
+  cors({
+    origin: (origin, cb) => {
+      if (!origin) return cb(null, true);
+
+      const allowAllInProd = envOrigins.length === 0;
+      const isDev = devOrigins.includes(origin);
+      const isWhitelisted = envOrigins.includes(origin);
+
+      if (isDev || isWhitelisted || allowAllInProd) return cb(null, true);
+      return cb(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,8 +48,13 @@ app.post("/search", (req, res) => {
   res.json({ query: skills, total: results.length, results });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT}`);
+app.get("/", (_req, res) => {
+  res.type("text").send("Accountable demo API is running. Try GET /profiles");
 });
+
+const PORT = Number(process.env.PORT || 3000);
+app.listen(PORT, () => {
+  console.log(`API listening on port ${PORT}`);
+});
+
 
