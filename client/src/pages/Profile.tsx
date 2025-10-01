@@ -58,7 +58,7 @@ export default function ProfilePage() {
       <Result
         status="404"
         title="Profile not found"
-        subTitle="Спробуйте повернутися до пошуку та обрати інший профіль."
+        subTitle="Try going back to the search and selecting another profile."
       />
     );
   }

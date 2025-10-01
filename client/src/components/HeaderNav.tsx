@@ -12,7 +12,7 @@ export default function HeaderNav() {
     : '/';
 
   const items = [
-    { key: '/',      icon: <HomeOutlined />,   label: <NavLink to="/">Home</NavLink> },
+    { key: '/', icon: <HomeOutlined />, label: <NavLink to="/">Home</NavLink> },
     { key: '/search',icon: <SearchOutlined />, label: <NavLink to="/search">Search</NavLink> },
     { key: '/profile', icon: <IdcardOutlined />, label: <NavLink to="/profile/1">Profile</NavLink> },
   ];

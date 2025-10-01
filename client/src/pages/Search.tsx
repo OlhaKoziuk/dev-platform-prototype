@@ -57,8 +57,8 @@ export default function Search() {
   const [allSkills, setAllSkills] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState<string | null>(null);
-  const [data, setData]       = useState<SearchResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<SearchResponse | null>(null);
   const [suggestions, setSuggestions] = useState<Profile[]>([]);
 
   useEffect(() => {
